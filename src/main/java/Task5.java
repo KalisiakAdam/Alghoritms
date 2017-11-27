@@ -1,10 +1,10 @@
 
 public class Task5 {
 
-   public int numberOfColumn;
-   public int numberOfRow;
-   public int numberOfChanges;
-   public int beginningNumberOfCountries;
+    public int numberOfColumn;
+    public int numberOfRow;
+    public int numberOfChanges;
+    public int beginningNumberOfCountries;
 
     public static void main(String[] args) {
 
@@ -12,11 +12,12 @@ public class Task5 {
                 {5,4,3,2,3,1,4},
                 {4,3,2,2,3,4,1},
                 {4,4,4,2,4,4,1},
-                {4,4,4,2,4,4,1}
+
+
         };
 
-       Task5 task5 = new Task5();
-       System.out.println(task5.solution(A));
+        Task5 task5 = new Task5();
+        System.out.println(task5.solution(A));
 
     }
 
@@ -34,78 +35,151 @@ public class Task5 {
         }
 
         for (int i = 0; i < newA.length; i++) {
-            System.out.println("i: " + i);
+
             if (newA[i] != -1) {
 
                 int indexRight = i;
                 int indexDown = i;
                 int indexUp = i;
+                int indexLeft = i;
 
-                while (isTheSameRight(newA, indexRight, numberOfRow) || isTheSameDown(newA, indexDown, numberOfRow)) {
-                    if (isTheSameRight(newA, indexRight, numberOfRow)) {
+                if(!isTheSameRight(newA, indexRight, numberOfRow) && !isTheSameDown(newA, indexDown, numberOfRow) &&  !isTheSameLeft(newA, indexLeft, numberOfRow) && !isTheSameUp(newA, indexUp)) {
 
-                        int tempRight = 0;
-                        int tempUp = 0;
-                        int tempDown = 0;
+                    newA[i] = -1;
 
-                        indexUp = indexUp + numberOfRow;
-                        indexDown = indexDown + numberOfRow;
-                        indexRight = indexRight + numberOfRow;
-//
-//                        System.out.println("indexRight changes " + indexRight);
-//                        numberOfChanges++;
 
-                        while (isTheSameRight(newA, indexRight, numberOfRow) || isTheSameUp(newA, indexUp) || isTheSameDown(newA, indexDown, numberOfRow)) {
 
-                            System.out.println("indexRight is: " + indexRight);
+                } else {
 
-                            if (isTheSameRight(newA, indexRight, numberOfRow)) {
+                    while (isTheSameRight(newA, indexRight, numberOfRow) || isTheSameDown(newA, indexDown, numberOfRow) || isTheSameUp(newA, indexUp)) {
+//right
+                        System.out.println("i: " + i);
 
-                                tempRight = indexRight;
-                                indexRight = indexRight + numberOfRow;
-                                System.out.println("indexRight changes " + indexRight);
-                                numberOfChanges++;
+                        if (isTheSameRight(newA, indexRight, numberOfRow)) {
+
+                            int tempRight = 0;
+                            int tempUp = 0;
+                            int tempDown = 0;
+
+                            while (isTheSameRight(newA, indexRight, numberOfRow) || isTheSameUp(newA, indexUp) || isTheSameDown(newA, indexDown, numberOfRow) || isTheSameLeft(newA, indexLeft, numberOfRow)) {
+
+                                if (isTheSameRight(newA, indexRight, numberOfRow)) {
+                                    System.out.println("indexRight is: " + indexRight);
+                                    tempRight = indexRight;
+                                    indexRight = indexRight + numberOfRow;
+                                    System.out.println("indexRight changes " + indexRight);
+
+
+                                    if (isTheSameUp(newA, indexRight)) {
+                                        System.out.println("indexUp is: " + indexUp);
+                                        tempUp = indexUp;
+                                        indexUp = indexRight - 1;
+                                        System.out.println("indexUp changes " + indexUp);
+
+
+                                        if(isTheSameUp(newA,indexUp)){
+                                            System.out.println("indexUp is: " + indexUp);
+                                            tempUp = indexUp;
+                                            indexUp = indexUp - 1;
+                                            System.out.println("indexUp changes " + indexUp);
+
+                                        }
+
+                                    }
+                                    if (isTheSameDown(newA, indexRight, numberOfRow)) {
+                                        System.out.println("indexDown is: " + indexDown);
+                                        tempDown = indexDown;
+                                        indexDown = indexRight + 1;
+                                        System.out.println("indexDown changes " + indexDown);
+
+                                        if(isTheSameDown(newA,indexDown,numberOfRow)){
+                                            System.out.println("indexDown is: " + indexDown);
+                                            tempDown = indexDown;
+                                            indexDown = indexDown +1;
+                                            System.out.println("indexDown changes " + indexDown);
+
+                                        }
+
+
+                                    }
+
+                                }
 
                             }
-                            System.out.println("indexUp is: " + indexUp);
-
-                            if (isTheSameUp(newA, indexUp)) {
-                                tempUp = indexUp;
-                                indexUp = indexUp - 1;
-                                System.out.println("indexUp changes " + indexUp);
-                                numberOfChanges++;
-
-                            }
-
-                            System.out.println("indexDown is " + indexDown);
-
-                            if (isTheSameDown(newA, indexDown, numberOfRow)) {
-                                tempDown = indexDown;
-                                indexDown = indexDown + 1;
-                                System.out.println("indexDown changes " + indexDown);
-                                numberOfChanges++;
-
-                            }
-
                             newA[tempRight] = -1;
                             newA[tempUp] = -1;
                             newA[tempDown] = -1;
+                        }
+                          else if (isTheSameDown(newA, indexDown, numberOfRow)){
+
+                            int tempRight = 0;
+                            int tempDown = 0;
+                            int tempLeft = 0;
+
+                            while(isTheSameRight(newA, indexRight, numberOfRow) || isTheSameDown(newA, indexDown, numberOfRow) || isTheSameLeft(newA, indexLeft, numberOfRow)){
+
+                                if (isTheSameDown(newA, indexDown, numberOfRow)) {
+                                    System.out.println("indexDown is: " + indexDown);
+                                    tempDown = indexDown;
+                                    indexDown = indexDown + 1;
+                                    System.out.println("indexDown changes " + indexDown);
+
+
+
+                                    if (isTheSameLeft(newA, indexDown, numberOfRow)) {
+
+                                        tempLeft = indexLeft;
+                                        indexLeft = indexDown - numberOfRow;
+                                        System.out.println("indexLeft changes " + indexLeft);
+
+
+                                        if(isTheSameLeft(newA,indexLeft,numberOfRow)){
+                                            tempLeft = indexLeft;
+                                            indexLeft = indexLeft - numberOfRow;
+                                            System.out.println("indexLeft changes " + indexLeft);
+
+                                        }
+
+                                    }
+
+                                    if (isTheSameRight(newA, indexDown, numberOfRow)) {
+
+                                        tempRight = indexRight;
+                                        indexRight = indexDown + numberOfRow;
+                                        System.out.println("indexRight changes " + indexRight);
+
+
+                                        if(isTheSameRight(newA, indexRight, numberOfRow)) {
+                                            tempRight = indexRight;
+                                            indexRight = indexRight +numberOfRow;
+                                            System.out.println("indexLeft changes " + indexLeft);
+
+
+                                        }
+
+                                    }
+                                }
+
+                                newA[tempRight] = -1;
+                                newA[tempDown] = -1;
+                                newA[tempLeft] = -1;
+
+                            }
+
+
 
                         }
 
 
                     }
 
-
                 }
-
-
             }
 
 
 
         }
-        return beginningNumberOfCountries-numberOfChanges;
+        return beginningNumberOfCountries ;
     }
 
 
@@ -113,14 +187,17 @@ public class Task5 {
         return (row)*numberOfColumns+col;
     }
 
+
+
+
     public boolean isTheSameRight (int [] table, int thisIndex, int numberOfRows){
 
         if ((thisIndex < (table.length - numberOfRows)) && table[thisIndex] != -1){
             return table[thisIndex] == table[thisIndex + numberOfRows];
         }else {
             return false;
-            }
         }
+    }
 
 
     public boolean isTheSameDown (int [] table, int thisIndex, int numberOfRows){
@@ -134,9 +211,18 @@ public class Task5 {
 
     public boolean isTheSameUp (int [] table, int thisIndex){
 
-        if (thisIndex >= 0 && table[thisIndex] != -1) {
+        if (thisIndex > 0 && table[thisIndex] != -1) {
             return table[thisIndex] == table[thisIndex - 1];
         }else{
+            return false;
+        }
+    }
+
+    public boolean isTheSameLeft (int [] table, int thisIndex, int numberOfRows){
+
+        if ((thisIndex > numberOfRow) && table[thisIndex] != -1){
+            return table[thisIndex] == table[thisIndex - numberOfRows];
+        }else {
             return false;
         }
     }

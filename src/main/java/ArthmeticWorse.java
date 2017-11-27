@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kalisiaczki on 12.05.2017.
- */
-public class App2 {
+
+public class ArthmeticWorse {
 
     public static void main(String[] args) {
 
-        App2 app2 = new App2();
+        ArthmeticWorse app2 = new ArthmeticWorse();
         int [] arr = {-1,1,3,3,3,2,1,0};
         System.out.println(app2.solution(arr));
 
