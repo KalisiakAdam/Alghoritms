@@ -1,15 +1,13 @@
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by kalisiaczki on 01.11.2017.
  */
-public class app3 {
+public class Seasons {
 
     public static void main(String[] args) {
 
-        app3 app = new app3();
+        Seasons app = new Seasons();
 
         int [] array = {-1,4,5,99,-12,34,54,11,100,2000,3,1,1,1,1,1};
 
